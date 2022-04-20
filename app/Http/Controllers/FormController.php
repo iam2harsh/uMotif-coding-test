@@ -10,15 +10,13 @@ class FormController extends Controller
 {
     public function index(): View
     {
-        $form = Form::make('clinical-trial')->render();
-
         return view('index')->with([
-            'form' => $form,
+            'form' => Form::make('clinical-trial')->render(),
             'csrf' => csrf_token(),
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): View
     {
         $payload = Form::make('clinical-trial')
             ->validate($request->all())
