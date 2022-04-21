@@ -9,12 +9,14 @@ use Util\Form\Facades\Form;
 use Util\Handlers\AssignCohort;
 use Util\Handlers\CreateFormData;
 use Util\Handlers\FormatDOB;
+use Util\Handlers\SaveResult;
 
 Form::make('clinical-trial')
     ->addHandlers([
         FormatDOB::class,
         CreateFormData::class,
-        AssignCohort::class
+        AssignCohort::class,
+        SaveResult::class
     ])
     ->addFields(function () {
         return [
