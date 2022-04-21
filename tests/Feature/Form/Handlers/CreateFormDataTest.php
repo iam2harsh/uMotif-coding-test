@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Util\Form\Handlers;
 
+use App\Models\FormData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Carbon;
@@ -60,5 +61,26 @@ class CreateFormDataTest extends TestCase
             'frequency' => 'daily',
             'daily_frequency' => '1-2',
         ]);
+    }
+
+    /** @test void */
+    public function adds_form_data_to_the_payload(): void
+    {
+        Carbon::setTestNow('2022-01-01 00:00:00');
+
+        $payload = Payload::make([
+            'name' => 'John',
+            'dob' => Carbon::createFromFormat('d/m/Y', '01/01/1990'),
+            'frequency' => 'daily',
+            'daily_frequency' => '1-2',
+        ]);
+
+        $formData = app(Pipeline::class)
+            ->send($payload)
+            ->through([new CreateFormData])
+            ->thenReturn()
+            ->getInput('form_data');
+
+        $this->assertTrue($formData->is(FormData::first()));
     }
 }
