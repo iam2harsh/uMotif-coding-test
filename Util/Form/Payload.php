@@ -20,10 +20,7 @@ class Payload
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getInput(?string $key = null)
+    public function getInput(?string $key = null): mixed
     {
         if ($key) {
             return Arr::get($this->input, $key);

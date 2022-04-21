@@ -8,7 +8,7 @@ class Option
 {
     public string $label;
 
-    public mixed $value;
+    public string|int $value;
 
     public function __construct(string $label, string $separator = '_')
     {
@@ -21,7 +21,7 @@ class Option
         return new static($label, $separator);
     }
 
-    public function value(mixed $value): self
+    public function value(string|int $value): self
     {
         $this->value = $value;
 

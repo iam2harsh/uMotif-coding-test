@@ -39,7 +39,7 @@ abstract class Component
         return $this;
     }
 
-    public function showIf(string $field, mixed $value): self
+    public function showIf(string $field, string|int $value): self
     {
         $this->logic['showIf'] = [
             'field' => $field,
