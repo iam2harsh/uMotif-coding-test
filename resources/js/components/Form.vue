@@ -43,7 +43,7 @@ export default {
                 return false;
             }
 
-            if (this.event && !!logic?.showIf) {
+            if (this.event && !!logic?.showIf && this.event.field === logic.showIf.field) {
                 return this.event.field === logic.showIf.field && this.event.value === logic.showIf.value;
             }
 
